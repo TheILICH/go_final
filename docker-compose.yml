@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  app:
+    depends_on:
+      - db
+    image: theilich/go_final:latest
+    container_name: app
+    hostname: app
+    command: ["./wait.sh", "db", "./myapp"]
+    env_file:
+      - ./.env
+    ports:
+      - "8080:8080"
+
+  db:
+    image: theilich/go_db:latest
+    container_name: db
+    hostname: db
+    env_file:
+      - ./.env
+    ports:
+      - "5432:5432"

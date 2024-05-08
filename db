@@ -1,0 +1,10 @@
+FROM postgres:16.2-alpine3.19
+
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=root
+ENV POSTGRES_DB=canteen-db
+ENV PORT=5432
+ENV HOST=db
+
+COPY db_dump.sql /docker-entrypoint-initdb.d/
+RUN chmod 777 /docker-entrypoint-initdb.d/db_dump.sql
